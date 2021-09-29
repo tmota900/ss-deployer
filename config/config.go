@@ -2,8 +2,6 @@ package config
 
 import (
 	"fmt"
-	"log"
-	"strconv"
 	
 	"github.com/BurntSushi/toml"
 )
