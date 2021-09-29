@@ -6,3 +6,4 @@
 *.cpu
 .env
 config.toml
+ss-deployer
