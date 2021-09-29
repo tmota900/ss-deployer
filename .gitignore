@@ -1,0 +1,8 @@
+# folders
+.idea
+
+# files
+*.prof
+*.cpu
+.env
+config.toml
