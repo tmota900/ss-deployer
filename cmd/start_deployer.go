@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/tmota900/ss-deployer/deployer"
 	"github.com/tmota900/ss-deployer/config"
+	"fmt"
 )
 
 // setHandlers define http routes
@@ -27,9 +28,9 @@ var StartDeployer = &cobra.Command{
 		// load configs
 		config.Load()
 
+		fmt.Println("yeeeeee")
 		// configure endpoints
 		router := setHandlers()
-
 		// start server
 		router.Listen(config.GetHTTPPort())
 	},

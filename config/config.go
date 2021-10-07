@@ -11,17 +11,20 @@ var (
 )
 
 type Config struct {
-	HTTP  map[string]int
+	HTTP  map[string]string
 }
 
 // Load configurations from config.toml file
 func Load() {
 	if _, err := toml.DecodeFile("config.toml", &conf); err != nil {
-		panic(err)
+		//panic(err)
 	}
 }
 
 //GetHTTPPort returns http port
 func GetHTTPPort() string {
+	if(conf.HTTP["port"] == ""){
+		return ":1337"
+	}
 	return fmt.Sprintf(":%d", conf.HTTP["port"])
 }
