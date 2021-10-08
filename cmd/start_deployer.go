@@ -1,11 +1,12 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber"
 	"github.com/spf13/cobra"
-	"github.com/tmota900/ss-deployer/deployer"
 	"github.com/tmota900/ss-deployer/config"
-	"fmt"
+	"github.com/tmota900/ss-deployer/deployer"
 )
 
 // setHandlers define http routes
