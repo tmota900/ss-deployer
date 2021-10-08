@@ -2,14 +2,20 @@ package deployer
 
 import (
 	"fmt"
+	"mime"
 	"os"
 	"os/exec"
 	"time"
 
+	"github.com/gofiber/fiber"
+	"github.com/google/go-github/github"
 	log "github.com/sirupsen/logrus"
 )
 
-var lastdeploy = time.Now()
+var (
+	lastdeploy = time.Now()
+	secretKey  = []byte("0123456789abcdef")
+)
 
 func getCurrentPath() string {
 	path, err := os.Getwd()
@@ -31,4 +37,29 @@ func ExecDeployScript() string {
 
 func LastDeployTime() string {
 	return fmt.Sprint("Last deploy time: ", lastdeploy)
+}
+
+func IsValidMessage(c *fiber.Ctx) bool {
+
+	_, err := ValidatePayload(c, secretKey)
+	if err != nil {
+		log.Error(err)
+		return false
+	}
+
+	return true
+}
+
+func ValidatePayload(c *fiber.Ctx, secretToken []byte) (payload []byte, err error) {
+	signature := c.Request().Header.Peek(github.SHA256SignatureHeader)
+	if signature == "" {
+		signature = c.Request().Header.Peek(github.SHA1SignatureHeader)
+	}
+
+	contentType, _, err := mime.ParseMediaType(c.Request().Header.Peek("Content-Type"))
+	if err != nil {
+		return nil, err
+	}
+
+	return github.ValidatePayloadFromBody(contentType, c.Body(), signature, secretToken)
 }
