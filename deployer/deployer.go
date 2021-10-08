@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"time"
+	"bytes"
 
 	"github.com/gofiber/fiber"
 	"github.com/google/go-github/github"
@@ -51,15 +52,15 @@ func IsValidMessage(c *fiber.Ctx) bool {
 }
 
 func ValidatePayload(c *fiber.Ctx, secretToken []byte) (payload []byte, err error) {
-	signature := c.Request().Header.Peek(github.SHA256SignatureHeader)
+	signature := string(c.Request().Header.Peek(github.SHA256SignatureHeader))
 	if signature == "" {
-		signature = c.Request().Header.Peek(github.SHA1SignatureHeader)
+		signature = string( c.Request().Header.Peek(github.SHA1SignatureHeader) )
 	}
 
-	contentType, _, err := mime.ParseMediaType(c.Request().Header.Peek("Content-Type"))
+	contentType, _, err := mime.ParseMediaType( string(c.Request().Header.Peek("Content-Type")) )
 	if err != nil {
 		return nil, err
 	}
 
-	return github.ValidatePayloadFromBody(contentType, c.Body(), signature, secretToken)
+	return github.ValidatePayloadFromBody(contentType, bytes.NewBuffer(c.Body()), signature, secretToken)
 }
