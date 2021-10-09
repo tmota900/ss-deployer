@@ -8,8 +8,8 @@ import (
 	"time"
 	"bytes"
 
-	"github.com/gofiber/fiber"
-	"github.com/google/go-github/github"
+	"github.com/gofiber/fiber/v2"
+	"github.com/google/go-github/v39/github"
 	log "github.com/sirupsen/logrus"
 )
 

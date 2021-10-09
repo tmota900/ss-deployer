@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"github.com/spf13/cobra"
 	"github.com/tmota900/ss-deployer/config"
 	"github.com/tmota900/ss-deployer/deployer"

@@ -1,7 +1,7 @@
 package deployer
 
 import (
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	log "github.com/sirupsen/logrus"
 )
 
