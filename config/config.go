@@ -26,5 +26,5 @@ func GetHTTPPort() string {
 	if(conf.HTTP["port"] == ""){
 		return ":1337"
 	}
-	return fmt.Sprintf(":%d", conf.HTTP["port"])
+	return fmt.Sprintf(":%s", conf.HTTP["port"])
 }
