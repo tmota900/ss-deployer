@@ -53,3 +53,15 @@ start service:
 # systemctl daemon-reload
 # service ss-deployer start
 ```
+
+#### Flags
+
+```
+Usage:
+   deployer [flags]
+
+Flags:
+  -h, --help            help for deployer
+  -p, --port string     Target port listner (default "1337")
+  -s, --secret string   Configured secret
+```
