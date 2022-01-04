@@ -12,9 +12,9 @@ require (
 	github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/gofiber/fiber v1.14.6 // indirect
-	github.com/gofiber/fiber/v2 v2.20.1 // indirect
+	github.com/gofiber/fiber/v2 v2.20.1
 	github.com/google/go-github v17.0.0+incompatible // indirect
-	github.com/google/go-github/v39 v39.1.1-0.20211008144426-6b0f37fa430d // indirect
+	github.com/google/go-github/v39 v39.1.1-0.20211008144426-6b0f37fa430d
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/gorilla/websocket v1.4.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0 // indirect
@@ -23,9 +23,9 @@ require (
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/prometheus/client_golang v0.9.3 // indirect
-	github.com/sirupsen/logrus v1.8.1 // indirect
+	github.com/sirupsen/logrus v1.8.1
 	github.com/soheilhy/cmux v0.1.4 // indirect
-	github.com/spf13/cobra v1.2.1 // indirect
+	github.com/spf13/cobra v1.2.1
 	github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5 // indirect
 	github.com/ugorji/go v1.1.4 // indirect
 	github.com/valyala/fasthttp v1.30.0 // indirect

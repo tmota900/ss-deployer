@@ -2,10 +2,10 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/spf13/cobra"
-	"github.com/tmota900/ss-deployer/config"
 	"github.com/tmota900/ss-deployer/deployer"
 )
 
@@ -22,17 +22,26 @@ func setHandlers() *fiber.App {
 }
 
 // StartDeployer starts deployer
-var StartDeployer = &cobra.Command{
-	Use:   "deployer",
-	Short: "start listning to / route",
-	Run: func(cmd *cobra.Command, args []string) {
-		// load configs
-		config.Load()
+func StartDeployer() *cobra.Command {
+	var port, secret string
+	c := &cobra.Command{
+		Use:   "deployer",
+		Short: "start listning to / route",
+		Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println("yeeeeee")
-		// configure endpoints
-		router := setHandlers()
-		// start server
-		router.Listen(config.GetHTTPPort())
-	},
+			deployer.SetSecret(secret)
+
+			// configure endpoints
+			router := setHandlers()
+			// start server
+			err := router.Listen(fmt.Sprintf(":%s", port))
+
+			if err != nil {
+				log.Fatal(err)
+			}
+		},
+	}
+	c.Flags().StringVarP(&port, "port", "p", "1337", "Target port listner")
+	c.Flags().StringVarP(&secret, "secret", "s", "", "Configured secret")
+	return c
 }

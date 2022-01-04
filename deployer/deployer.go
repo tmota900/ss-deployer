@@ -1,12 +1,12 @@
 package deployer
 
 import (
+	"bytes"
 	"fmt"
 	"mime"
 	"os"
 	"os/exec"
 	"time"
-	"bytes"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/go-github/v39/github"
@@ -15,8 +15,12 @@ import (
 
 var (
 	lastdeploy = time.Now()
-	secretKey  = []byte("0123456789abcdef")
+	secretKey  = []byte("")
 )
+
+func SetSecret(secret string) {
+	secretKey = []byte(secret)
+}
 
 func getCurrentPath() string {
 	path, err := os.Getwd()
@@ -42,6 +46,10 @@ func LastDeployTime() string {
 
 func IsValidMessage(c *fiber.Ctx) bool {
 
+	if bytes.Compare(secretKey, []byte("")) == 0 {
+		return true
+	}
+
 	_, err := ValidatePayload(c, secretKey)
 	if err != nil {
 		log.Error(err)
@@ -54,10 +62,10 @@ func IsValidMessage(c *fiber.Ctx) bool {
 func ValidatePayload(c *fiber.Ctx, secretToken []byte) (payload []byte, err error) {
 	signature := string(c.Request().Header.Peek(github.SHA256SignatureHeader))
 	if signature == "" {
-		signature = string( c.Request().Header.Peek(github.SHA1SignatureHeader) )
+		signature = string(c.Request().Header.Peek(github.SHA1SignatureHeader))
 	}
 
-	contentType, _, err := mime.ParseMediaType( string(c.Request().Header.Peek("Content-Type")) )
+	contentType, _, err := mime.ParseMediaType(string(c.Request().Header.Peek("Content-Type")))
 	if err != nil {
 		return nil, err
 	}
