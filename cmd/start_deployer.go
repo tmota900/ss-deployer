@@ -7,6 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/spf13/cobra"
 	"github.com/tmota900/ss-deployer/deployer"
+	"github.com/tmota900/ss-deployer/utils"
 )
 
 // setHandlers define http routes
@@ -41,7 +42,7 @@ func StartDeployer() *cobra.Command {
 			}
 		},
 	}
-	c.Flags().StringVarP(&port, "port", "p", "1337", "Target port listner")
-	c.Flags().StringVarP(&secret, "secret", "s", "", "Configured secret")
+	c.Flags().StringVarP(&port, "port", "p", utils.Getenv("DEPLOYER_PORT", "1337"), "Target port listner")
+	c.Flags().StringVarP(&secret, "secret", "s", utils.Getenv("DEPLOYER_SECRET", ""), "Configured secret")
 	return c
 }

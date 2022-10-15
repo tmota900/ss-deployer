@@ -11,6 +11,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/go-github/v39/github"
 	log "github.com/sirupsen/logrus"
+	"github.com/tmota900/ss-deployer/utils"
 )
 
 var (
@@ -32,7 +33,7 @@ func getCurrentPath() string {
 
 // ExecDeployScript
 func ExecDeployScript() string {
-	output, err := exec.Command("/bin/sh", getCurrentPath()+"/deploy.sh").Output()
+	output, err := exec.Command("/bin/sh", utils.Getenv("DEPLOY_SCRIPT_DIR", getCurrentPath()+"/deploy.sh")).Output()
 	if err != nil {
 		fmt.Println(err.Error())
 	}
