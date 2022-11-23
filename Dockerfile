@@ -6,6 +6,7 @@ RUN go build -o ss-deployer .
 FROM alpine:latest
 
 RUN apk add curl
+RUN apk add bash
 
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/)/kubectl"
 
