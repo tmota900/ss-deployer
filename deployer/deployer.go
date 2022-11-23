@@ -38,6 +38,8 @@ func ExecDeployScript() string {
 		fmt.Println(err.Error())
 	}
 	lastdeploy = time.Now()
+
+	log.Info(string(output))
 	return string(output)
 }
 
