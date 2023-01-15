@@ -33,7 +33,7 @@ func getCurrentPath() string {
 
 // ExecDeployScript
 func ExecDeployScript() string {
-	output, err := exec.Command("/bin/sh", utils.Getenv("DEPLOY_SCRIPT_DIR", getCurrentPath()+"/deploy.sh")).Output()
+	output, err := exec.Command("/bin/bash", utils.Getenv("DEPLOY_SCRIPT_DIR", getCurrentPath()+"/deploy.sh")).Output()
 	if err != nil {
 		fmt.Println(err.Error())
 	}
