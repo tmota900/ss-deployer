@@ -35,7 +35,7 @@ func getCurrentPath() string {
 func ExecDeployScript() string {
 	output, err := exec.Command("/bin/bash", utils.Getenv("DEPLOY_SCRIPT_DIR", getCurrentPath()+"/deploy.sh")).Output()
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Error(err)
 	}
 	lastdeploy = time.Now()
 
